@@ -28,12 +28,20 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
     bot: telebot.TeleBot
 
     def set_handlers(self, bot: telebot.TeleBot):
+        """
+        Получает данные о финансовом инструменте через Finnhub API.
+
+        Args:
+            symbol (str): тикер (например, AAPL)
+
+        Returns:
+            dict: ответ от API с данными по инструменту
+        """
         self.bot = bot
 
         @bot.message_handler(commands=["top_5"])
         def top_5_handler(message: types.Message):
             try:
-        
                 response = requests.get(
                     f"{self.BASE_URL}/stock/symbol",
                     params={"exchange": "US", "token": self.API_KEY},
@@ -42,7 +50,6 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
                 response.raise_for_status()
                 data = response.json()
 
-        
                 symbols = [item["symbol"] for item in data[:50]]
 
                 stocks = []
@@ -70,7 +77,6 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
                     bot.send_message(message.chat.id, "Не удалось получить данные.")
                     return
 
-        
                 stocks.sort(key=lambda x: x["price"], reverse=True)
 
                 top5 = stocks[:5]
