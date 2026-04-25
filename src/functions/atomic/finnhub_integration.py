@@ -5,6 +5,7 @@ import requests
 import telebot
 from telebot import types
 from bot_func_abc import AtomicBotFunctionABC
+import os
 
 
 class FinnhubIntegrationFunction(AtomicBotFunctionABC):
@@ -21,7 +22,10 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
     )
     state: bool = True
 
-    API_KEY = "d7if1e1r01qn2qatpmo0d7if1e1r01qn2qatpmog"
+    API_KEY_FINN_HUB = os.environ.get("API_KEY_FINN_HUB")
+    if not API_KEY_FINN_HUB:
+        raise ValueError("No api key: API_KEY_FINN_HUB")
+    
     BASE_URL = "https://finnhub.io/api/v1"
     TIMEOUT = 5
 
