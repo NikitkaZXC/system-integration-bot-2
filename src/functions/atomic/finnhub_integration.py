@@ -23,8 +23,6 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
     state: bool = True
 
     API_KEY_FINN_HUB = os.environ.get("API_KEY_FINN_HUB")
-    if not API_KEY_FINN_HUB:
-        raise ValueError("No api key: API_KEY_FINN_HUB")
 
     BASE_URL = "https://finnhub.io/api/v1"
     TIMEOUT = 5
