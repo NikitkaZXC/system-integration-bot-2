@@ -25,7 +25,7 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
     API_KEY_FINN_HUB = os.environ.get("API_KEY_FINN_HUB")
     if not API_KEY_FINN_HUB:
         raise ValueError("No api key: API_KEY_FINN_HUB")
-    
+
     BASE_URL = "https://finnhub.io/api/v1"
     TIMEOUT = 5
 
@@ -48,7 +48,7 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
             try:
                 response = requests.get(
                     f"{self.BASE_URL}/stock/symbol",
-                    params={"exchange": "US", "token": self.API_KEY},
+                    params={"exchange": "US", "token": self.API_KEY_FINN_HUB},
                     timeout=self.TIMEOUT
                 )
                 response.raise_for_status()
@@ -62,7 +62,7 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
                     try:
                         quote = requests.get(
                             f"{self.BASE_URL}/quote",
-                            params={"symbol": symbol, "token": self.API_KEY},
+                            params={"symbol": symbol, "token": self.API_KEY_FINN_HUB},
                             timeout=self.TIMEOUT
                         ).json()
 
@@ -111,7 +111,7 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
             try:
                 response = requests.get(
                     f"{self.BASE_URL}/stock/profile2",
-                    params={"symbol": symbol, "token": self.API_KEY},
+                    params={"symbol": symbol, "token": self.API_KEY_FINN_HUB},
                     timeout=self.TIMEOUT
                 )
                 response.raise_for_status()
