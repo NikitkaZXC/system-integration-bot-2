@@ -12,7 +12,7 @@ class FinnhubIntegrationFunction(AtomicBotFunctionABC):
 
     commands: List[str] = ["top_5", "info_company"]
     authors: List[str] = ["Nikita"]
-    about: str = "Топ 5 ценных бумаг через finnhub.io"
+    about: str = "Топ 5 бумаг через finnhub.io"
     description: str = (
         "Получение топ 5 акций по цене.\n"
         "Пример команды: /top_5\n\n"
