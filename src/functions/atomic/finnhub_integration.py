@@ -1,11 +1,11 @@
 """Module implementation of the atomic function of the telegram bot: FinnhubIntegrationFunction"""
 
+import os
 from typing import List
 import requests
 import telebot
 from telebot import types
 from bot_func_abc import AtomicBotFunctionABC
-import os
 
 
 class FinnhubIntegrationFunction(AtomicBotFunctionABC):
